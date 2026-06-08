@@ -22,6 +22,10 @@ jobs:
   train-and-deploy:
     name: Train Model & Build Docker
     runs-on: ubuntu-latest
+    
+    # Tambahan: Izin eksplisit agar bot bisa melakukan commit & push (Fix 403 error)
+    permissions:
+      contents: write
 
     steps:
       # 1. Checkout kode
@@ -79,6 +83,9 @@ jobs:
           git add MLProject/mlruns/
           git diff --staged --quiet || \
             git commit -m "chore: update mlruns artifacts [skip ci]"
+          
+          # Tambahan: Sinkronisasi branch sebelum push untuk mencegah error rejected
+          git pull --rebase origin main
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -88,7 +95,6 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       # 10. Login ke Docker Hub (Advance)
-      #     Tambahkan secrets: DOCKER_USERNAME dan DOCKER_PASSWORD di repo GitHub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
