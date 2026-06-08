@@ -12,7 +12,6 @@ jobs:
     name: Train Model & Build Docker
     runs-on: ubuntu-latest
     
-    # Izin tetap dipertahankan untuk keamanan akses
     permissions:
       contents: write
 
@@ -45,15 +44,12 @@ jobs:
             -P min_samples_leaf=2 \
             -P data_dir=../heart_disease_preprocessing
 
-      # Step 7: Simpan artefak ke fitur Artifacts GitHub (Aman & Tidak error Git)
       - name: Upload model artifacts
         uses: actions/upload-artifact@v4
         with:
           name: mlflow-model-artifacts
           path: MLProject/mlruns/
           retention-days: 30
-
-      # Step 8: DIHAPUS agar tidak ada konflik git push
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -67,6 +63,9 @@ jobs:
       - name: Build Docker image with MLflow
         run: |
           cd MLProject
+          # Membersihkan sistem Docker dari image/cache gagal sebelumnya
+          docker system prune -f 
+          
           mlflow models build-docker \
             --model-uri "mlruns/0/$(ls mlruns/0/ | grep -v 'meta.yaml' | head -1)/artifacts/model" \
             --name "${{ secrets.DOCKER_USERNAME }}/heart-disease-model:latest" \
