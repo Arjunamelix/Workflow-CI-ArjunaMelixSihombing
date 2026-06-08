@@ -75,22 +75,27 @@ jobs:
           path: MLProject/mlruns/
           retention-days: 30
 
-      # 8. Commit mlruns ke repository (Skilled)
+# 8. Commit mlruns ke repository (Skilled)
       - name: Commit mlruns to repository
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Fetch dan reset ke origin/main agar sinkron total
-          git fetch origin main
-          git reset --hard origin/main
-          
+          # Tambahkan file ke staging
           git add MLProject/mlruns/
-          git diff --staged --quiet || \
-            git commit -m "chore: update mlruns artifacts [skip ci]"
           
-          # Force push agar tidak ditolak lagi
-          git push --force origin main
+          # Cek apakah ada perubahan
+          if git diff --staged --quiet; then
+            echo "Tidak ada artefak baru untuk di-commit."
+          else
+            git commit -m "chore: update mlruns artifacts [skip ci]"
+            
+            # Ambil perubahan terbaru dari server tanpa menghapus pekerjaan lokal
+            git pull --rebase origin main
+            
+            # Push perubahan
+            git push origin main
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
