@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI-ArjunaMelixSihombing/Workflow-CI-ArjunaMelixSihombing/MLProject/mlruns/0/041f06e10b1a494fac5425a5bb582710/artifacts
+end_time: 1780936175017
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 041f06e10b1a494fac5425a5bb582710
+run_name: silent-cod-499
+run_uuid: 041f06e10b1a494fac5425a5bb582710
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780936167203
+status: 3
+tags: []
+user_id: runner
