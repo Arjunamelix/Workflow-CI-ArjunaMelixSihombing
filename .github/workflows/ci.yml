@@ -44,7 +44,7 @@ jobs:
       - name: Show preprocessed data
         run: |
           echo "=== File hasil preprocessing ==="
-          ls -lh preprocessing/heart_disease_preprocessing/
+          ls -lh MLProject/heart_disease_preprocessing/
           echo ""
           echo "=== 3 baris pertama train.csv ==="
           head -n 4 preprocessing/heart_disease_preprocessing/train.csv
