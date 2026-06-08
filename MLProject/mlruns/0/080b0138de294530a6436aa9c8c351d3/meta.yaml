@@ -1,0 +1,15 @@
+artifact_uri: file:///home/runner/work/Workflow-CI-ArjunaMelixSihombing/Workflow-CI-ArjunaMelixSihombing/MLProject/mlruns/0/080b0138de294530a6436aa9c8c351d3/artifacts
+end_time: 1780929431258
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 080b0138de294530a6436aa9c8c351d3
+run_name: charming-moose-147
+run_uuid: 080b0138de294530a6436aa9c8c351d3
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1780929421371
+status: 3
+tags: []
+user_id: runner
