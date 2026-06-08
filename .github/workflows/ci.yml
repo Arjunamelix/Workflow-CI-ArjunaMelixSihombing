@@ -63,8 +63,9 @@ jobs:
       - name: Build Docker image with MLflow
         run: |
           cd MLProject
-          # Membersihkan sistem Docker dari image/cache gagal sebelumnya
-          docker system prune -f 
+          # Kita tidak lagi menggunakan build-docker bawaan MLflow 
+          # yang error, tapi kita build manual dengan docker build
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/heart-disease-model:latest . 
           
           mlflow models build-docker \
             --model-uri "mlruns/0/$(ls mlruns/0/ | grep -v 'meta.yaml' | head -1)/artifacts/model" \
