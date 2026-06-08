@@ -55,7 +55,7 @@ jobs:
             -P max_depth=10 \
             -P min_samples_split=5 \
             -P min_samples_leaf=2 \
-            -P data_dir=heart_disease_preprocessing
+            -P data_dir=../heart_disease_preprocessing
 
       # 6. Tampilkan isi mlruns untuk verifikasi
       - name: Show MLflow artifacts
