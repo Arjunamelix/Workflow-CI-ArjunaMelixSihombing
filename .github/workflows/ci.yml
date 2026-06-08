@@ -80,13 +80,17 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Fetch dan reset ke origin/main agar sinkron total
+          git fetch origin main
+          git reset --hard origin/main
+          
           git add MLProject/mlruns/
           git diff --staged --quiet || \
             git commit -m "chore: update mlruns artifacts [skip ci]"
           
-          # Tambahan: Sinkronisasi branch sebelum push untuk mencegah error rejected
-          git pull --rebase origin main
-          git push
+          # Force push agar tidak ditolak lagi
+          git push --force origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
