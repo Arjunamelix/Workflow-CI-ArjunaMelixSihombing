@@ -80,7 +80,8 @@ def save_roc_curve(y_test, y_proba, path):
 def main():
     args = parse_args()
 
-    mlflow.set_experiment("Heart-Disease-CI")
+    # Baris ini dinonaktifkan agar tidak bentrok dengan GitHub Actions
+    # mlflow.set_experiment("Heart-Disease-CI") 
     mlflow.sklearn.autolog(disable=True)
 
     X_train, X_test, y_train, y_test = load_data(args.data_dir)
@@ -129,9 +130,10 @@ def main():
         mlflow.log_artifact(cm_path,  artifact_path="plots")
         mlflow.log_artifact(roc_path, artifact_path="plots")
 
+        # Tag disesuaikan
         mlflow.set_tags({
             "dataset"   : "UCI Heart Disease",
-            "author"    : "Arjun Sinaga",
+            "author"    : "Arjuna Melix Sihombing",
             "model_type": "RandomForestClassifier",
         })
 
